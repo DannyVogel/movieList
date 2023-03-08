@@ -18,7 +18,7 @@ document.getElementById('search-bar-btn').addEventListener('click', ()=> {
     setTimeout(()=>{
         loadingEl.style.display = 'none'
         
-        fetch(`http://www.omdbapi.com/?apikey=88ef49ef&s=${searchTerm}`)
+        fetch(`https://www.omdbapi.com/?apikey=88ef49ef&s=${searchTerm}`)
             .then(res => res.json())
             .then(data => {
                 if(data.Response == 'False'){

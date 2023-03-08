@@ -6,7 +6,7 @@ export default class Movie {
     }
 
     getFullMovieData(){
-        return fetch(`http://www.omdbapi.com/?apikey=88ef49ef&i=${this.id}`)
+        return fetch(`https://www.omdbapi.com/?apikey=88ef49ef&i=${this.id}`)
                 .then(res => res.json())
                 .then(apiData => {
                     this.rating = apiData.imdbRating
