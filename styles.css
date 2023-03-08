@@ -99,6 +99,10 @@ header > p > a {
     cursor: pointer;
 }
 
+.search-bar-btn:hover {
+    background-color: rgb(202, 202, 202);
+}
+
 main {
     flex-grow: 1;
     display: flex;
@@ -114,6 +118,42 @@ main {
     color: #DFDDDD;
     font-size: 18px;
 }
+
+/* loading animation */
+.lds-hourglass {
+    display: none;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-hourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #6B7280;
+    border-color: #6B7280 transparent #6B7280 transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+  @keyframes lds-hourglass {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+
+/* loading animation end */
+
 
 .film-img {
     width: 70px;
