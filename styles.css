@@ -4,11 +4,13 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    background-color: grey;
 }
 
 body {
     width: 550px;
-    height: 800px;
+    min-height: 800px;
+    height: 100%;
     margin: 0 auto;
     border: 1px solid black;
     display: flex;
@@ -107,12 +109,10 @@ main {
 }
 
 .initial-container {
+    max-width: 340px;
     margin: 0 auto;
     text-align: center;
     color: #DFDDDD;
-}
-
-.initial-container > p {
     font-size: 18px;
 }
 
@@ -139,6 +139,7 @@ p,h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 340px;
 }
 
 .movie-header-container {
@@ -160,7 +161,6 @@ p,h1 {
 }
 
 .movie-summary-text {
-    max-width: 340px;
     text-align: justify;
     color: #6B7280;
 }
