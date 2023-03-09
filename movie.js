@@ -59,21 +59,23 @@ export default class Movie {
     setWatchlistClick(){
         let wlContainers = document.querySelectorAll(`.watchlist-container`)
         wlContainers.forEach(container => container.addEventListener('click', (e) => {
-            if(watchlistIds.includes(e.target.dataset.movieId)){
+            let id = e.target.dataset.movieId
+            if(watchlistIds.includes(id)){
                 this.watchlisted = false
                 container.innerHTML = `
-                <i class="fa-solid fa-circle-plus green"></i>
-                <p class="watchlist-txt">Watchlist</p>
+                <i data-movie-id="${id}" class="fa-solid fa-circle-plus green"></i>
+                <p data-movie-id="${id}" class="watchlist-txt">Watchlist</p>
                 `
-                watchlistIds.splice(watchlistIds.indexOf(e.target.dataset.movieId),1)
+                watchlistIds.splice(watchlistIds.indexOf(id),1)
                 localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
+                location.pathname == '/watchlist.html' && location.reload()
             } else {
                 this.watchlisted = true
                 container.innerHTML = `
-                <i class="fa-solid fa-circle-minus red"></i>
-                <p class="watchlist-txt">Remove</p>
+                <i data-movie-id="${id}" class="fa-solid fa-circle-minus red"></i>
+                <p data-movie-id="${id}" class="watchlist-txt">Remove</p>
                 `
-                watchlistIds.push(e.target.dataset.movieId)
+                watchlistIds.push(id)
                 localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
             }
             
