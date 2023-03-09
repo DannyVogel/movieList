@@ -1,40 +1,20 @@
-const watchlist = JSON.parse(localStorage.getItem("watchlist"))
+import Movie from './movie.js'
 
+document.getElementById('main-container').style.justifyContent = ''
 const resultsContainerEl = document.getElementById('results-container')
-const mainContainerEl = document.getElementById('main-container')
+const watchlistIds = JSON.parse(localStorage.getItem("watchlistIds"))
+console.log(watchlistIds)
 
-mainContainerEl.style.justifyContent = 'flex-start'
+if(watchlistIds){
+    document.getElementById('initial-container').style.display = 'none'
+    document.getElementById('main-container').style.justifyContent = 'flex-start'
+}
 
-console.log(watchlist)
-
-watchlist && watchlist.forEach(movie => {
-    let movieHtml = `
-        <div class="movie-result-container">
-            <div class="poster-container">
-                <img src="${movie.poster}" alt="">
-            </div>
-
-            <div class="movie-details-container">
-                <div class="movie-header-container">
-                    <h1 class="movie-title">${movie.title}</h1>
-                    <i class="fa-solid fa-star"></i>
-                    <p class="rating">${movie.rating}</p>
-                </div>
-
-                <div class="movie-info-container">
-                    <p class="runtime-txt">${movie.runtime}</p>
-                    <p class="categories-txt">${movie.genre}</p>
-                    <div class="watchlist-container" data-movie-id="${movie.id}">
-                        <i data-movie-id="${movie.id}" class="fa-solid fa-circle-plus"></i>
-                        <p data-movie-id="${movie.id}" class="watchlist-txt">Watchlist</p>
-                    </div>
-                </div>
-
-                <div class="movie-summary-container">
-                    <p class="movie-summary-text">${movie.plot}</p>
-                </div>
-            </div>
-        </div>
-        `
-    resultsContainerEl.innerHTML += movieHtml
+watchlistIds && watchlistIds.forEach(id => {
+    fetch(`https://www.omdbapi.com/?apikey=88ef49ef&i=${id}`)
+            .then(res => res.json())
+            .then(movieData => {
+                let movie = new Movie(movieData)
+                resultsContainerEl.innerHTML += movie.getHtml()
+            })
 })
