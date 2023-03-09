@@ -125,6 +125,11 @@ main {
     color: black;
 }
 
+.fa-film {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
 .watchlist-add-txt {
     margin: 10px 0;
 }
