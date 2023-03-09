@@ -7,7 +7,6 @@ export default class Movie {
         this.runtime = data.Runtime 
         this.genre = data.Genre
         this.plot = data.Plot
-        this.watchlisted = false
     }
 
     getFullMovieData(){
@@ -61,7 +60,6 @@ export default class Movie {
         wlContainers.forEach(container => container.addEventListener('click', (e) => {
             let id = e.target.dataset.movieId
             if(watchlistIds.includes(id)){
-                this.watchlisted = false
                 container.innerHTML = `
                 <i data-movie-id="${id}" class="fa-solid fa-circle-plus green"></i>
                 <p data-movie-id="${id}" class="watchlist-txt">Watchlist</p>
@@ -70,7 +68,6 @@ export default class Movie {
                 localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
                 location.pathname == '/watchlist.html' && location.reload()
             } else {
-                this.watchlisted = true
                 container.innerHTML = `
                 <i data-movie-id="${id}" class="fa-solid fa-circle-minus red"></i>
                 <p data-movie-id="${id}" class="watchlist-txt">Remove</p>
