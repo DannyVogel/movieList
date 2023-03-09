@@ -1,4 +1,4 @@
-class Movie {
+export default class Movie {
     constructor(data){
         this.poster = data.Poster
         this.title = data.Title
@@ -56,14 +56,10 @@ class Movie {
     setWatchlistClick(){
         let wlContainers = document.querySelectorAll(`.watchlist-container`)
         wlContainers.forEach(container => container.addEventListener('click', (e) => {
-            let movieID = e.target.dataset.movieId
-            console.log(movieID)
-            watchlist.push(movieID)
-            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            watchlistIds.push(e.target.dataset.movieId)
+            localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
     }))}
 
 }
 
-const watchlist = []
-
-export {Movie, watchlist}
+let watchlistIds = JSON.parse(localStorage.getItem("watchlistIds")) ? JSON.parse(localStorage.getItem("watchlistIds")) : []
