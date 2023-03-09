@@ -1,4 +1,4 @@
-import {Movie, watchlist} from './movie.js'
+import Movie from './movie.js'
 
 const mainContainerEl = document.getElementById('main-container')
 const initialContainerEl = document.getElementById('initial-container')
