@@ -7,6 +7,7 @@ export default class Movie {
         this.runtime = data.Runtime 
         this.genre = data.Genre
         this.plot = data.Plot
+        this.watchlisted = false
     }
 
     getFullMovieData(){
@@ -22,7 +23,9 @@ export default class Movie {
     }
 
     getHtml(){
-        const {poster, title, rating, runtime, genre, id, plot} = this
+        const {poster, title, rating, runtime, genre, id, plot, watchlisted} = this
+        let sign = watchlistIds.includes(id) ? "minus red" : "plus green"
+        let watchlistTxt = watchlistIds.includes(id) ? "Remove" : "Watchlist"
         return `
         <div class="movie-result-container">
             <div class="poster-container">
@@ -32,7 +35,7 @@ export default class Movie {
             <div class="movie-details-container">
                 <div class="movie-header-container">
                     <h1 class="movie-title">${title}</h1>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star orange"></i>
                     <p class="rating">${rating}</p>
                 </div>
 
@@ -40,8 +43,8 @@ export default class Movie {
                     <p class="runtime-txt">${runtime}</p>
                     <p class="categories-txt">${genre}</p>
                     <div class="watchlist-container" data-movie-id="${id}">
-                        <i data-movie-id="${id}" class="fa-solid fa-circle-plus"></i>
-                        <p data-movie-id="${id}" class="watchlist-txt">Watchlist</p>
+                        <i data-movie-id="${id}" class="fa-solid fa-circle-${sign}"></i>
+                        <p data-movie-id="${id}" class="watchlist-txt">${watchlistTxt}</p>
                     </div>
                 </div>
 
@@ -56,8 +59,24 @@ export default class Movie {
     setWatchlistClick(){
         let wlContainers = document.querySelectorAll(`.watchlist-container`)
         wlContainers.forEach(container => container.addEventListener('click', (e) => {
-            watchlistIds.push(e.target.dataset.movieId)
-            localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
+            if(watchlistIds.includes(e.target.dataset.movieId)){
+                this.watchlisted = false
+                container.innerHTML = `
+                <i class="fa-solid fa-circle-plus green"></i>
+                <p class="watchlist-txt">Watchlist</p>
+                `
+                watchlistIds.splice(watchlistIds.indexOf(e.target.dataset.movieId),1)
+                localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
+            } else {
+                this.watchlisted = true
+                container.innerHTML = `
+                <i class="fa-solid fa-circle-minus red"></i>
+                <p class="watchlist-txt">Remove</p>
+                `
+                watchlistIds.push(e.target.dataset.movieId)
+                localStorage.setItem('watchlistIds', JSON.stringify(watchlistIds));
+            }
+            
     }))}
 
 }

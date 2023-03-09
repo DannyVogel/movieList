@@ -209,8 +209,22 @@ p,h1 {
 .watchlist-container {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 5px;
     cursor: pointer;
+    width: 80px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
 }
 
 .movie-summary-text {
