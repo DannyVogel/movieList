@@ -1,8 +1,12 @@
-export default class Movie {
+class Movie {
     constructor(data){
         this.poster = data.Poster
         this.title = data.Title
         this.id = data.imdbID
+        this.rating = data.imdbRating
+        this.runtime = data.Runtime 
+        this.genre = data.Genre
+        this.plot = data.Plot
     }
 
     getFullMovieData(){
@@ -18,7 +22,7 @@ export default class Movie {
     }
 
     getHtml(){
-        const {poster, title, rating, runtime, genre, plot} = this
+        const {poster, title, rating, runtime, genre, id, plot} = this
         return `
         <div class="movie-result-container">
             <div class="poster-container">
@@ -35,9 +39,9 @@ export default class Movie {
                 <div class="movie-info-container">
                     <p class="runtime-txt">${runtime}</p>
                     <p class="categories-txt">${genre}</p>
-                    <div class="watchlist-container">
-                        <i class="fa-solid fa-circle-plus"></i>
-                        <p class="watchlist-txt">Watchlist</p>
+                    <div class="watchlist-container" data-movie-id="${id}">
+                        <i data-movie-id="${id}" class="fa-solid fa-circle-plus"></i>
+                        <p data-movie-id="${id}" class="watchlist-txt">Watchlist</p>
                     </div>
                 </div>
 
@@ -48,4 +52,18 @@ export default class Movie {
         </div>
         `
     }
+
+    setWatchlistClick(){
+        let wlContainers = document.querySelectorAll(`.watchlist-container`)
+        wlContainers.forEach(container => container.addEventListener('click', (e) => {
+            let movieID = e.target.dataset.movieId
+            console.log(movieID)
+            watchlist.push(movieID)
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    }))}
+
 }
+
+const watchlist = []
+
+export {Movie, watchlist}

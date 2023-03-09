@@ -1,4 +1,4 @@
-import Movie from './movie.js'
+import {Movie, watchlist} from './movie.js'
 
 const mainContainerEl = document.getElementById('main-container')
 const initialContainerEl = document.getElementById('initial-container')
@@ -38,13 +38,9 @@ document.getElementById('search-bar-btn').addEventListener('click', ()=> {
                         item.getFullMovieData()
                             .then((movie) => {
                                 resultsContainerEl.innerHTML += movie.getHtml()
+                                movie.setWatchlistClick()
                             })
                     })
             }
         })
 })
-
-
-
-
-
