@@ -39,6 +39,7 @@ header {
 .watchlist-link-txt {
     margin: 0;
     padding-top: 5px;
+    width: 140px;
 }
 
 header > p > a {
@@ -117,6 +118,15 @@ main {
     text-align: center;
     color: #DFDDDD;
     font-size: 18px;
+}
+
+.initial-container > p > a {
+    text-decoration: none;
+    color: black;
+}
+
+.watchlist-add-txt {
+    margin: 10px 0;
 }
 
 /* loading animation */
