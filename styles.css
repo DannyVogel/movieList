@@ -125,7 +125,10 @@ main {
     position: relative;
     width: 80px;
     height: 80px;
+    color: #DFDDDD;
+    font-size: 18px
   }
+
   .lds-hourglass:after {
     content: " ";
     display: block;
